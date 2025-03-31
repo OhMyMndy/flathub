@@ -27,8 +27,8 @@ modules:
       - squashfs-root
     sources:
       - type: file
-        url: https://beeper-desktop.download.beeper.com/builds/Beeper-4.0.522.AppImage
-        sha256: a9755910893de69e6c59d83ab2d4165109ffc38f894260d1e87c929460b9c809
+        url: https://beeper-desktop.download.beeper.com/builds/Beeper-4.0.570.AppImage
+        sha256: af3153ecd7d7785b7d5b70e3274cb20b34ed3d2741f858d84078f13db78c7225
         dest-filename: beeper.AppImage
 
       - type: script
@@ -43,8 +43,7 @@ modules:
       - chmod +x beeper.AppImage
       - ./beeper.AppImage --appimage-extract
       - mv squashfs-root/* "${FLATPAK_DEST}/"
-
-      - install -Dm644 "${FLATPAK_DEST}/usr/share/icons/hicolor/0x0/apps/beepertexts.png" "${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png"
+      - install -Dm644 "${FLATPAK_DEST}/usr/share/icons/hicolor/512x512/apps/beepertexts.png" "${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png"
       - install -Dm644 "${FLATPAK_DEST}/beepertexts.desktop" "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
 
       - desktop-file-edit --set-key=Exec --set-value="start-beeper" "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
