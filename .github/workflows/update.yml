@@ -1,0 +1,47 @@
+name: Nightly version update
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run every night at midnight UTC
+    - cron: '0 0 * * *'
+
+jobs:
+  nightly-version-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install xmlstarlet -y -q
+
+      - name: Run the update script
+        run: ./update.sh
+
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_ENV
+          else
+            echo "changes=true" >> $GITHUB_ENV
+          fi
+
+
+      - name: Create Pull Request for changes
+        if: env.changes == 'true' && ! env.ACT
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore: bump version"
+          branch: version-update
+          title: "bump version"
+          body: |
+            This is an automated pull request to update the repository with the changes from `./update.sh`.
