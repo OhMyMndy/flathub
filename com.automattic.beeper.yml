@@ -27,8 +27,8 @@ modules:
       - squashfs-root
     sources:
       - type: file
-        url: https://beeper-desktop.download.beeper.com/builds/Beeper-4.0.623.AppImage
-        sha256: 2b4e37450e41a12d72b27998f8ba518b1066331d9709b4738569d6b31836e9d8
+        url: https://beeper-desktop.download.beeper.com/builds/Beeper-4.0.661.AppImage
+        sha256: 70a787b6da1a57e50de4b5d402b53111c3238f76b8923723d04ba20eb893b721
         dest-filename: beeper.AppImage
 
       - type: script
