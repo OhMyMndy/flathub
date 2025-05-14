@@ -22,8 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get update -q
-          apt-get install xmlstarlet yq -y -q
+          sudo apt-get update -q
+          sudo apt-get install xmlstarlet yq -y -q
 
       - name: Run the update script
         run: ./update.sh
@@ -43,8 +43,8 @@ jobs:
         run: |
           FLATHUB_REPO=https://dl.flathub.org/repo/flathub.flatpakrepo
   
-          apt-get update -q
-          apt-get install -y -q flatpak-builder flatpak build-essential git-core appstream-compose
+          sudo apt-get update -q
+          sudo apt-get install -y -q flatpak-builder flatpak build-essential git-core appstream-compose
           flatpak --user remote-add --if-not-exists flathub $FLATHUB_REPO
 
       - uses: actions/cache@v4
