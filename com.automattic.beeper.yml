@@ -27,27 +27,22 @@ modules:
       - squashfs-root
     sources:
       - type: file
-        url: https://beeper-desktop.download.beeper.com/builds/Beeper-4.0.661.AppImage
-        sha256: 70a787b6da1a57e50de4b5d402b53111c3238f76b8923723d04ba20eb893b721
+        url: https://beeper-desktop.download.beeper.com/builds/Beeper-4.0.688.AppImage
+        sha256: 481aad2d710a55ab75ee910c7354a05f0d563a61fd62c3b7345bdf1e298fed5a
         dest-filename: beeper.AppImage
-
       - type: script
         dest-filename: start-beeper.sh
         commands:
           - exec zypak-wrapper /app/beepertexts "$@"
-
       - type: file
         path: com.automattic.beeper.metainfo.xml
-
     build-commands:
       - chmod +x beeper.AppImage
       - ./beeper.AppImage --appimage-extract
       - mv squashfs-root/* "${FLATPAK_DEST}/"
       - install -Dm644 "${FLATPAK_DEST}/usr/share/icons/hicolor/512x512/apps/beepertexts.png" "${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png"
       - install -Dm644 "${FLATPAK_DEST}/beepertexts.desktop" "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
-
       - desktop-file-edit --set-key=Exec --set-value="start-beeper" "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
       - desktop-file-edit --set-icon com.automattic.beeper "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
-
       - install -Dm644 com.automattic.beeper.metainfo.xml "${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml"
       - install -Dm 755 start-beeper.sh "${FLATPAK_DEST}/bin/start-beeper"

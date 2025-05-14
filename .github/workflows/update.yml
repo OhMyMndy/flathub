@@ -19,8 +19,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get update
-          apt-get install xmlstarlet -y -q
+          apt-get update -qq
+          apt-get install xmlstarlet yq -y -qq
 
       - name: Run the update script
         run: ./update.sh
@@ -35,6 +35,29 @@ jobs:
             echo "changes=true" >> $GITHUB_ENV
           fi
 
+      - name: Build dependencies
+        if: env.changes == 'true'
+        run: |
+          FLATHUB_REPO=https://dl.flathub.org/repo/flathub.flatpakrepo
+  
+          apt-get update -qq
+          apt-get install -y -qq flatpak-builder flatpak build-essential git-core appstream-compose
+          flatpak --user remote-add --if-not-exists flathub $FLATHUB_REPO
+
+      - uses: actions/cache@v4
+        id: flatpak-builder-cache
+        if: ! env.ACT
+        with:
+          path: |
+            .flatpak-builder
+            repo
+          key: flatpak-builder
+
+      - name: Build
+        if: env.changes == 'true'
+        run: |
+          rm -rf builddir
+          flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir com.automattic.beeper.yml
 
       - name: Create Pull Request for changes
         if: env.changes == 'true' && ! env.ACT
