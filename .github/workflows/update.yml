@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - *
+      - '*'
   schedule:
     # Run every night at midnight UTC
     - cron: '0 0 * * *'
