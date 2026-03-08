@@ -22,6 +22,7 @@
   <url type="help">https://help.beeper.com/</url>
   <url type="faq">https://www.beeper.com/faq</url>
   <releases>
+    <release version="4.2.482&#10;86&#10;64" date="2026-01-15"/>
     <release version="4.0.688" date="2025-05-14"/>
     <release version="4.0.661" date="2025-05-12"/>
     <release version="4.0.623" date="2025-04-18"/>

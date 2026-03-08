@@ -1,8 +1,8 @@
 app-id: com.automattic.beeper
 base: org.electronjs.Electron2.BaseApp
-base-version: "24.08"
+base-version: "25.08"
 runtime: org.freedesktop.Platform
-runtime-version: "24.08"
+runtime-version: "25.08"
 sdk: org.freedesktop.Sdk
 command: start-beeper
 separate-locales: false
@@ -27,8 +27,8 @@ modules:
       - squashfs-root
     sources:
       - type: file
-        url: https://beeper-desktop.download.beeper.com/builds/Beeper-4.0.688.AppImage
-        sha256: 481aad2d710a55ab75ee910c7354a05f0d563a61fd62c3b7345bdf1e298fed5a
+        url: https://beeper-desktop.download.beeper.com/builds/Beeper-4.2.482-x86_64.AppImage
+        sha256: 9b1044d14d8006239d48d8fc7372ea826cb9885b4eba5082910fa80b6c7210d0
         dest-filename: beeper.AppImage
       - type: script
         dest-filename: start-beeper.sh
